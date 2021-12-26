@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" th:href="@{/css/body.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+    <title>Title</title>
+</head>
+
+
+<body>
+<div class="main_container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+
+    <section style="height: 900px"></section>
+
+
+<!--    <div class="navbar_user">-->
+<!--        <ul class="navbar_user_ul">-->
+
+<!--            <li><a th:href="@{/members/add}">회원가입</a></li>-->
+<!--            <li><a href="/">기업제휴</a></li>-->
+<!--            <li><a th:href="@{/itemShop/add}">상품등록(관리자 전용)</a></li>-->
+<!--            <li><a th:href="@{/itemShop/admin_ItemList}">상품리스트(관리자 전용)</a></li>-->
+
+<!--        </ul>-->
+
+<!--    </div>-->
+
+<!--    <div class="navbar_main">-->
+<!--        <div class="navbar_logo">-->
+<!--            <a href="/">Hongtudio</a>-->
+<!--        </div>-->
+
+<!--        <ul class="navbar_menu">-->
+
+<!--            <li><a th:href="@{/itemShop/user_ItemList}">소품샵</a></li>-->
+<!--            <li><a th:href="@{/subShop/prop}">상품 전체 리스트</a></li>-->
+
+<!--        </ul>-->
+
+<!--        <ul class="navbar_icons">-->
+<!--            <li><a href="/">개인정보</a></li>-->
+<!--            <li><a th:href="@{/members/itemBasket}">장바구니</a></li>-->
+<!--        </ul>-->
+
+<!--    </div>-->
+
+    <div th:replace="fragments/footer :: footer"/>
+</div>
+</body>
+<script>
+    const chkLogout = () => {
+        if (!confirm("로그아웃 하시겠습니까?")) return false;
+        window.location.href = '/logout';
+    }
+
+    const cl = () => {
+        console.log("@@@")
+        console.log("@@@")
+        window.location.href = '/login';
+    }
+</script>
+
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" th:href="@{/css/body.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+    <title> 상품등록 페이지(관리자) </title>
+</head>
+<body>
+<div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="createItemContainer">
+        <form th:action="@{/items/new}" th:object="${form}" method="post">
+
+
+
+
+
+
+
+
+
+        </form>
+
+
+
+        <div th:replace="fragments/footer :: footer" />
+    </div> <!-- END container -->
+</body>
+</html>

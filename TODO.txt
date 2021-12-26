@@ -1,0 +1,110 @@
+1. 상품관리 (관리자)
+  -> 삭제, 전체삭제 셀렉트박스 추가 (O)
+
+
+2. 상품등록 (관리자)
+  -> TODO : 상품 카테고리 관리기능 (추가, 삭제, 이름변경)
+  -> TODO : 상품 카테고리에 따라 뷰 페이지 변경 (selectBox)
+
+  -> TODO : 이미지 등록 기능 추가
+
+
+insert into categories(category_name, parent_id) values ('여성', 1l);
+insert into categories(category_name, parent_id) values ('남성', 1l);
+insert into categories(category_name, parent_id) values ('아동', 1l);;
+insert into categories(category_name, parent_id) values ('스포츠', 1l);;
+insert into categories(category_name, parent_id) values ('잡화', 1l);;
+
+insert into categories values (0, '패션', 0);
+insert into categories values (0, '가전/디지털', 0);
+insert into categories values (0, '도서', 0);
+insert into categories values (0, '식품', 0);
+
+insert into categories(category_name, parent_id) values ('가전/디지털', 0);
+insert into categories(category_name, parent_id) values ('도서', 0);
+insert into categories(category_name, parent_id) values ('식품', 0);
+
+
+
+
+select * from CATEGORIES_SEQ;
+create sequence CATEGORIES_SEQ start with 1 increment by 1
+
+drop sequence CATEGORIES_SEQ;
+
+
+
+package dev.hongtudio_v3.domain_vo;
+
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "categories")
+@Getter
+@Setter
+@SequenceGenerator(
+        name = "CATEGORIES_SEQ_GENERATOR",
+        sequenceName = "CATEGORIES_SEQ", // 시퀸스 명
+        initialValue = 1, // 초기 값
+        allocationSize = 1 // 미리 할당 받을 시퀸스 수
+)
+
+/** self referencing table */
+public class Categories {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CATEGORIES_SEQ_GENERATOR")
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue
+    @Column(name = "category_id")
+    private Long categoryId;
+    private String categoryName;
+
+    @OneToMany(mappedBy = "categories")
+    private List<CategoryItem> categoryList = new ArrayList<>();
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    private Categories parentId;
+
+
+    @OneToMany(mappedBy = "parentId", cascade = CascadeType.ALL)
+    private List<Categories> subCategories = new ArrayList<>();
+
+    public void addChildCategory(Categories child) {
+        this.subCategories.add(child);
+        child.setParentId(this);
+    }
+
+    public Categories() {
+    }
+
+    public Categories(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public Categories(String categoryName, Categories parentId) {
+        this.categoryName = categoryName;
+        this.parentId = parentId;
+    }
+
+    public Categories(Long categoryId, String categoryName, Categories parentId) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.parentId = parentId;
+    }
+
+    public Categories(Long categoryId, String categoryName) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+    }
+}
+

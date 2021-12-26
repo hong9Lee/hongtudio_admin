@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div class="header" th:fragment="bodyHeader">
+    <div class="headerTop">
+        <a th:href="@{/}"><h1 class="logo">Hongtudio</h1></a>
+
+        <div class="search">
+            <fieldset>
+                <legend>검색</legend>
+                <input type="text" class="searchInput" placeholder="  지금 앱을 다운받아보세요!" id="total_search_keyword">
+                <button type="button" class="searchBtn">
+                    <img th:src="@{/image/search_icon_black.png}">
+                </button>
+            </fieldset>
+        </div>
+    </div>
+
+
+    <div id="topBar" class="headerBottom">
+        <div id="headerA" class="depth1"> <!-- 카테고리 표시 헤더 -->
+
+            <ul class="depth_ul1 headerButton_li gnb">
+                <li>
+                    <a>랭킹</a>
+                </li>
+
+                <li>
+                    <a>맨</a>
+                </li>
+
+
+            </ul>
+
+
+
+            <ul class="depth_ul2 gnb">
+                <li>
+                    <a>이벤트</a>
+                </li>
+
+                <li>
+                    <a>세일</a>
+                </li>
+
+                <li>
+                    <a th:href="@{/admin/itemList}">상품관리(관리자)</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="headerB"> <!-- 핫 키워드 표시 헤더 -->
+
+
+
+        </div>
+    </div>
+
+
+</div>
+</body>
+
+</html>
+
+

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" th:href="@{/css/body.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/goodslist.css}"/>
+    <!--    <script th:src="@{../../static/lib/jquery-3.6.0.min.js}"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Title</title>
+</head>
+
+<body>
+<div th:replace="fragments/bodyHeader :: bodyHeader"/>
+<div class="itemListContainer">
+
+    <h3 class="list-main">상품 리스트</h3>
+
+    <select class="select-category">
+        <option value="default">카테고리 선택</option>
+        <option th:each="val : ${parentList}"
+        th:value="${val.category_name}"
+        th:text="${val.category_name}">
+
+        </option>
+    </select>
+
+    <div class="layer-popup" id="layer-popup">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                팝업 내용입니다.
+            </div>
+        </div>
+    </div>
+    <a href="#layer-popup" class="btn-open">카테고리 수정</a>
+
+
+    <br><br>
+
+    <label class="checkbox-inline">
+        <input type="checkbox" id="allCheckBox" class="chk" onclick="allChecked(this)">
+    </label>
+    <button th:onclick="selectDel()">선택삭제</button>
+
+    <br><br>
+    <div class="goodsList">
+    <ul class="d_goodsList">
+        <li class="goods" th:each="item : ${findAllItemList}">
+            <label class="checkbox-inline">
+                <input type="checkbox" class="chk" name="cchk" onclick="cchkClicked()" th:value="${item.id}">
+            </label>
+            <!--                <button th:onclick="postItemId([[${item.id}]])">삭제</button>-->
+            <button th:onclick="selectDel()">삭제</button>
+
+            <div class="goods_img">
+                /이미지 입니다/
+            </div>
+
+            <div class="goods_name">
+                <h3 th:text="${item.name}"></h3>
+            </div>
+
+            <div class="goods_price">
+                <h3 th:text="${item.price}"></h3>
+            </div>
+
+        </li>
+
+    </ul>
+</div>
+
+
+    <div>
+
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
+
+<script>
+
+    // 팝업 열기
+    $(document).on("click", ".btn-open", function (e){
+        var target = $(this).attr("href");
+        $(target).addClass("show");
+    });
+
+    // 외부영역 클릭 시 팝업 닫기
+    $(document).mouseup(function (e){
+        var LayerPopup = $(".layer-popup");
+        if(LayerPopup.has(e.target).length === 0){
+            LayerPopup.removeClass("show");
+        }
+    });
+
+
+
+    const selectDel = () => {
+        var idxArray = [];
+
+        $("input:checkbox[name=cchk]:checked").each(function (){
+            idxArray.push($(this).val());
+        });
+
+        if (idxArray.length === 0) {
+            alert("선택된 항목이 없습니다.");
+        } else {
+            if (confirm("정말 삭제하시겠습니까?")) deleteItems(idxArray);
+        }
+
+    }
+
+    /** 상품 삭제 */
+    const deleteItems = (items) => {
+        console.log(items)
+        $.ajax({
+            type : "POST",
+            url  : "/admin/items/deleteItems",
+            data : {arr : items}, // contentType: "application/x-www-form-urlencoded; charset=UTF-8;",
+            success : function (result){
+                location.href = "/admin/itemList";
+            }
+        })
+    };
+
+    /** 체크박스 전체 선택 */
+    const allChecked = (target) => {
+        if ($(target).is(":checked")) {
+            $(".chk").prop("checked", true);
+        } else {
+            $(".chk").prop("checked", false);
+        }
+    }
+
+    /** 개별 체크박스 선택 */
+    const cchkClicked = () => {
+        let allCount = $("input:checkbox[name=cchk]").length;
+        let checkedCount = $("input:checkbox[name=cchk]:checked").length;
+
+        if (allCount === checkedCount) {
+            $(".chk").prop("checked", true);
+        } else {
+            $("#allCheckBox").prop("checked", false);
+        }
+    }
+
+</script>

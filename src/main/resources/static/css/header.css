@@ -1,0 +1,153 @@
+ul, ol, dl, li {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+fieldset {
+    border: 0 none;
+}
+
+legend {
+    font-size: 0px;
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+    position: absolute;
+    visibility: hidden;
+}
+
+.logo {
+    position: absolute;
+    top: 35px;
+    margin-left: 112px;
+    font-family: Avenir;
+}
+
+.header {
+
+}
+
+.headerTop {
+    position: relative;
+    top: 0px;
+    background-color: #fff;
+    margin: 0 auto;
+    padding: 26px 0 50px;
+    min-width: 1300px;
+    z-index: 2;
+}
+
+.headerTop a {
+    color: #0d0d0d;
+}
+
+.headerBottom {
+    position: relative;
+    margin: 0 auto;
+    min-width: 1300px;
+    border-bottom: 1px solid #e6e6e6;
+    background-color: #fff;
+    top: 10px;
+
+    height: 76px;
+}
+
+.headerTop .search {
+    position: absolute;
+    left: 50%;
+    padding-bottom: 15px;
+    width: 460px;
+    /*vertical-align: top;*/
+    border-bottom: 2px solid #000;
+    transform: translate(-50%, 0);
+    z-index: 10;
+}
+
+.headerTop .searchInput {
+
+    padding-right: 30px;
+    width: 100%;
+    height: 23px;
+    font-size: 14px;
+    font-weight: 300;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: none;
+}
+
+.searchInput {
+    box-sizing: border-box;
+
+    width: 100%;
+    height: 30px;
+    font-size: 14px;
+    line-height: 30px;
+    color: #666666;
+    border: 1px solid #e3e3e3;
+    background: #ffffff;
+    padding: 0 20px;
+    color: #0d0d0d;
+
+    outline: none;
+
+}
+
+.headerTop .search .searchBtn {
+    position: absolute;
+
+    right: 0;
+    top: 0;
+    /*left: 0;*/
+    width: 23px;
+    height: 23px;
+
+    border: none;
+    background: #fff;
+}
+
+.headerTop .search .searchBtn img {
+    position: absolute;
+
+    /*right: 0;*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gnb {
+    padding : 26px 0 0;
+}
+
+.depth_ul1::after {
+    content: "";
+    display: inline-block;
+    margin: 4px 69px 0;
+    width: 1px;
+    height: 12px;
+    background-color: #d9d9d9;
+}
+
+.headerBottom .depth1 {
+    float: left;
+    margin-left: 112px;
+    background-color: #fff;
+}
+
+.depth_ul1, .depth_ul2, .depth_ul1 > li, .depth_ul2 > li {
+    float: left;
+}
+
+.depth_ul1 > li, .depth_ul2 > li {
+    padding-right: 32px;
+    padding-bottom: 27px;
+}
+
+.depth_ul1 > li > a, .depth_ul2 > li > a {
+    line-height: 19px;
+    font-size: 25px;
+    font-weight: 700;
+    color: #212121;
+}
