@@ -71,7 +71,7 @@ public class CategoryService {
         data.put(categoryDTO.getName(), categoryDTO);
         return data;
     }
-
+//
 //    @Transactional
 //    public void saveCategoryItems(Categories categories) {
 //        categoryRepository.save(categories);
