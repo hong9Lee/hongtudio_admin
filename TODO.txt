@@ -8,6 +8,31 @@
 
   -> TODO : 이미지 등록 기능 추가
 
+-> 카테고리 RESPONSE 샘플
+{
+  "ROOT": {
+        "categoryId": 1,
+        "branch": "coupang",
+        "code": "ROOT",
+        "name": "ROOT",
+        "parentCategoryName": "대분류",
+        "level": 0,
+        "children": {
+            "1": {
+                "categoryId": 2,
+                "branch": "coupang",
+                "code": "1",
+                "name": "clothes",
+                "parentCategoryName": "ROOT",
+                "level": 1,
+                "children": {}
+            }
+        }
+    }
+  }
+
+
+
 
 insert into categories(category_name, parent_id) values ('여성', 1l);
 insert into categories(category_name, parent_id) values ('남성', 1l);
