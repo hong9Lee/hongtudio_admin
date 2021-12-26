@@ -61,7 +61,7 @@ public class CategoryService {
         Long save = categoryRepository.save(category);
         return save;
     }
-
+//
     public Map<String, CategoryDTO> getCategoryByBranch(String branch) {
         Categories category = categoryRepository.findByBranchAndCode(branch, "ROOT")
                 .orElseThrow(() -> new IllegalArgumentException("찾는 대분류가 없습니다"));
