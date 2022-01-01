@@ -65,17 +65,17 @@ public class InitDb {
 //            categories2.addChildCategory(cat4);
 //
 //            categoryService.saveCategoryItems(categories2);
-
-
+//
+//
 //            List<Categories> ca = categoryService.getCategoryAll();
 //            System.out.println("ca = " + ca);
-
+//
 //            for (Categories categories1 : ca) {
 //                System.out.println("categories1 = " + categories1);
 //            }
 
-//            categoryService.addCategory(null, "아우터");
-
+            categoryService.addCategory(null, "아우터");
+            categoryService.addCategory(new Categories("아우터"), "패딩");
 
 
             System.out.println("em = " + em);

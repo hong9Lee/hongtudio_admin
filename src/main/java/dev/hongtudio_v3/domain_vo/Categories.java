@@ -16,36 +16,57 @@ import java.util.List;
         initialValue = 1, // 초기 값
         allocationSize = 1 // 미리 할당 받을 시퀸스 수
 )
-@NoArgsConstructor
+
 /** self referencing table */
 public class Categories {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CATEGORIES_SEQ_GENERATOR")
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue
+    @Column(name = "category_id")
+    private Long categoryId;
+    private String categoryName;
 
-    @Column(nullable = false)
-    private String branch;
-
-    private String code;
-    private String name;
+    @OneToMany(mappedBy = "categories")
+    private List<CategoryItem> categoryList = new ArrayList<>();
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_category_id")
-    private Categories parentCategory;
-
-    @OneToMany(mappedBy = "parentCategory", cascade = CascadeType.ALL)
-    private List<Categories> subCategory = new ArrayList<>();
-    private Integer level;
+    @JoinColumn(name = "parent_id")
+    private Categories parentId;
 
 
-    @Builder
-    public Categories(String branch, String code, String name, Categories parentCategory, List<Categories> subCategory, Integer level) {
-        this.branch = branch;
-        this.code = code;
-        this.name = name;
-        this.parentCategory = parentCategory;
-        this.level = level;
+    @OneToMany(mappedBy = "parentId", cascade = CascadeType.ALL)
+    private List<Categories> subCategories = new ArrayList<>();
+
+
+
+    public void addChildCategory(Categories child) {
+        this.subCategories.add(child);
+        child.setParentId(this);
+    }
+
+    public Categories() {
+    }
+
+    public Categories(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public Categories(String categoryName, Categories parentId) {
+        this.categoryName = categoryName;
+        this.parentId = parentId;
+    }
+
+    public Categories(Long categoryId, String categoryName, Categories parentId) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.parentId = parentId;
+    }
+
+    public Categories(Long categoryId, String categoryName) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
     }
 }
