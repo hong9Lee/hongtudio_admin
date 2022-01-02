@@ -14,28 +14,18 @@ public class CategoryRepository {
 
     private final EntityManager em;
 
-
-    public Optional<Categories> findByName(String name) {
-        return Optional.ofNullable(em.createQuery("select i from Categories i where i.name = :name", Categories.class)
-                .setParameter("name", name)
-                .getSingleResult());
-    }
-
-    public void save(Categories categories) {
+    public Categories save(Categories categories) {
         em.persist(categories);
-//        em.merge(categories);
-
-//        return categories.getId();
+        return categories;
     }
 
     public List<Categories> findAll() {
-        return em.createQuery("select i from Categories i", Categories.class)
+        return em.createQuery("select i from Categories i where i.parent.categoryId IS NOT NULL", Categories.class)
                 .getResultList();
     }
 
     public Categories findRootData() {
-        return em.createQuery("select i from Categories i where i.categoryId = :id", Categories.class)
-                .setParameter("id", 1)
+        return em.createQuery("select i from Categories i where i.parent.categoryId IS NULL", Categories.class)
                 .getSingleResult();
     }
 
@@ -46,4 +36,9 @@ public class CategoryRepository {
         return null;
     }
 
+    public Categories findById(Long id) {
+        return em.createQuery("select i from Categories i where i.categoryId = :id", Categories.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 }

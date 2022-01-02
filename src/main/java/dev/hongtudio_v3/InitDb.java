@@ -45,37 +45,9 @@ public class InitDb {
             }
 
 
-
-//            Categories rootCat = new Categories("root");
-//            categoryService.saveCategoryItems(rootCat);
-//
-//            Categories categories = new Categories("패션", rootCat);
-//
-//            Categories cat2 = new Categories( "남성", categories);
-//            categories.addChildCategory(cat2);
-//
-//            Categories cat3 = new Categories( "여성", categories);
-//            categories.addChildCategory(cat3);
-//
-//            categoryService.saveCategoryItems(categories);
-//
-//
-//            Categories categories2 = new Categories("악세서리", rootCat);
-//            Categories cat4 = new Categories( "시계", categories2);
-//            categories2.addChildCategory(cat4);
-//
-//            categoryService.saveCategoryItems(categories2);
-//
-//
-//            List<Categories> ca = categoryService.getCategoryAll();
-//            System.out.println("ca = " + ca);
-//
-//            for (Categories categories1 : ca) {
-//                System.out.println("categories1 = " + categories1);
-//            }
-
-            categoryService.addCategory(null, "아우터");
-            categoryService.addCategory(new Categories("아우터"), "패딩");
+            Categories cat = categoryService.addCategory(null, "아우터");
+            // 부모 카테고리가 존재하는 경우, view에서 부모 카테고리 Form을 전달해 아래의 cat 파라미터에 넣는다.
+            categoryService.addCategory(cat, "패딩");
 
 
             System.out.println("em = " + em);

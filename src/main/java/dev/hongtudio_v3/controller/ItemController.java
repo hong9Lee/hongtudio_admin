@@ -27,7 +27,7 @@ public class ItemController {
     public String adminItemList(Model model) {
 
         model.addAttribute("findAllItemList", itemService.findItemAll());
-//        model.addAttribute("parentList", categoryService.getParents());
+        model.addAttribute("parentList", categoryService.getCategoryAll());
         return "admin/adminItemList";
     }
 
